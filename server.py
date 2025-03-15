@@ -3,6 +3,7 @@ from threading import Thread, Lock
 from time import sleep
 import json
 from lxml import etree as et
+import os
 
 UTF8 = 'utf-8'
 CREATE_OP = 'C'
@@ -320,8 +321,12 @@ def init():
     global host, port, clients, lock
     global save_filename, xml_tree, xml_root, log_tag_name, latest_acc_name_tag_name, latest_extra_info_tag_name, latest_pwd_tag_name
     global log_item_tag_name, acc_name_tag_name, extra_info_tag_name, pwd_tag_name
-    host = '192.168.2.105'
-    port = 56789
+    # read ip and port from connection json file
+    conn_json_file_dir = r'..\conn.json'
+    with open(conn_json_file_dir, 'r') as file:
+        data = json.load(file)
+        host = data['server_private_ip']
+        port = int(data['port'])
     clients = []
     lock = Lock()
     # XML
