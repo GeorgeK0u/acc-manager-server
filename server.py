@@ -3,7 +3,6 @@ from threading import Thread, Lock
 from time import sleep
 import json
 from lxml import etree as et
-import os
 
 UTF8 = 'utf-8'
 CREATE_OP = 'C'
